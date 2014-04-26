@@ -1,5 +1,5 @@
 defmodule Notes.File do
-	def notes(filename) do
+	def read(filename) do
 		case File.open(filename) do
 			{ :ok, file } -> IO.stream(file, :line) |> Stream.map(&String.strip(&1))
 			{ :error, :enoent } -> create_file(filename)
