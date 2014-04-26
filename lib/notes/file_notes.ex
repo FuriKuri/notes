@@ -7,6 +7,12 @@ defmodule Notes.File do
 		end
 	end
 
+	def add(filename, note) do
+		old_content = read(filename) |> Enum.to_list
+		content = [note] ++ old_content
+		File.write!(filename, Enum.reduce(content, &("#{&2}\n#{&1}")))
+	end
+
 	defp create_file(filename) do
 		unless File.exists?(Path.dirname(filename)) do
 			File.mkdir_p(Path.dirname(filename))

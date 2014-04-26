@@ -12,6 +12,13 @@ defmodule FileNotesTest do
 		assert NF.read("test/fixture/empty.txt") |> Enum.to_list == []
 	end
 
+	test "add note to file" do
+		file_content = File.read!("test/fixture/notes.txt")
+		NF.add("test/fixture/notes.txt", "New note")
+		assert NF.read("test/fixture/notes.txt") |> Enum.at(0) == "New note"
+		File.write!("test/fixture/notes.txt", file_content)
+	end
+
 	test "create file if does not exists" do
 		File.rm!("test/fixture/empty.txt")
 		assert NF.read("test/fixture/empty.txt") == []
