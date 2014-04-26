@@ -4,6 +4,7 @@ install:
    - sudo apt-get update
    - sudo apt-get install erlang
    - git clone https://github.com/elixir-lang/elixir
+   - git checkout tags/v0.13.0
    - make -C elixir
 before_script: "export PATH=`pwd`/elixir/bin:$PATH"
 script: mix test
