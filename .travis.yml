@@ -4,6 +4,7 @@ install:
    - sudo apt-get update
    - sudo apt-get install erlang
    - wget https://github.com/elixir-lang/elixir/archive/v0.13.zip
+   - unzip v0.13.zip 
    - mv elixir-0.13 elixir
    - make -C elixir
 before_script: "export PATH=`pwd`/elixir/bin:$PATH"
