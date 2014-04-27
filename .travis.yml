@@ -3,7 +3,8 @@ install:
    - sudo dpkg -i erlang-solutions_1.0_all.deb
    - sudo apt-get update
    - sudo apt-get install erlang
-   - git clone https://github.com/elixir-lang/elixir
+   - wget https://github.com/elixir-lang/elixir/archive/v0.13.zip
+   - mv elixir-0.13 elixir
    - make -C elixir
 before_script: "export PATH=`pwd`/elixir/bin:$PATH"
 script: mix test
