@@ -26,7 +26,6 @@ defmodule Notes.CLI do
 
   def process(:help) do
     print_help
-		System.halt(0)
 	end
 
   def process({:list, count}) do
