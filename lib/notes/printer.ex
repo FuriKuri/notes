@@ -10,6 +10,7 @@ defmodule Notes.Printer do
 	def print_help() do
 		IO.puts """
 		usage:
+		Hello Worl
 		notes add <note> [--priority n]
 		notes list [count | #{Config.default_count}]
 		"""
