@@ -5,12 +5,12 @@ defmodule Notes.CLI do
 
 	def main(args) do
     	args
-    		|> parse_args 
+    		|> parse_args
     		|> process
   end
 
   def parse_args(argv) do
-  	parse = OptionParser.parse(argv, 
+  	parse = OptionParser.parse(argv,
       switches: [help: :boolean, priority: :integer],
   		aliases: [h: :help, p: :priority])
   	case parse do
