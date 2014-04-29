@@ -4,6 +4,7 @@ defmodule Notes.Printer do
 
 	def print_notes(count) do
 		IO.puts "Print notes #{count}"
+		read(Config.note_file)
 	end
 
 	def print_help() do

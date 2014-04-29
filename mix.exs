@@ -2,11 +2,11 @@ defmodule Notes.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :notes,
-     version: "0.0.1",
-     elixir: "~> 0.13.0",
-     escript_main_module: Notes.CLI,
-     deps: deps]
+    [ app: :notes,
+      version: "0.0.1",
+      elixir: "~> 0.13.0",
+      escript_main_module: Notes.CLI,
+      deps: deps ]
   end
 
   # Configuration for the OTP application
