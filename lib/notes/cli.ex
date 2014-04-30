@@ -21,6 +21,8 @@ defmodule Notes.CLI do
 
       {_, ["ls", count], _} -> {:ls, binary_to_integer(count)}
       {_, ["ls"], _} -> {:ls, Config.default_count}
+
+      {_, _, _} -> :help
   	end
   end
 
