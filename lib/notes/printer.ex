@@ -4,6 +4,7 @@ defmodule Notes.Printer do
     format_for: 1,
     width_of_priorities: 1,
     width_of_notes: 1,
+    width_of_ids: 1,
     separator: 1 ]
 
   alias Notes.Parser, as: Parser
@@ -16,17 +17,17 @@ defmodule Notes.Printer do
   end
 
   def put_content_table(entries) do
-    column_width = [width_of_priorities(entries), width_of_notes(entries)]
+    column_width = [width_of_ids(entries), width_of_priorities(entries), width_of_notes(entries)]
     format = format_for(column_width)
     entries
-      |> Enum.map(fn {p, n} -> [to_string(p), n] end)
+      |> Enum.map(fn {i, p, n} -> [to_string(i), to_string(p), n] end)
       |> Enum.each(&(:io.format(format, &1)))
   end
 
   def put_header_table(entries) do
-    column_width = [width_of_priorities(entries), width_of_notes(entries)]
+    column_width = [width_of_ids(entries), width_of_priorities(entries), width_of_notes(entries)]
     format = format_for(column_width)
-    :io.format(format, [Notes.Formatter.prio_header, Notes.Formatter.note_header])
+    :io.format(format, [Notes.Formatter.id_header, Notes.Formatter.prio_header, Notes.Formatter.note_header])
     IO.puts separator(column_width)
   end
 

@@ -4,10 +4,21 @@ defmodule Notes.Formatter do
   def prio_header, do: @attr
   @attr "Note"
   def note_header, do: @attr
+  @attr "ID"
+  def id_header, do: @attr
+
+  def width_of_ids(entries) do
+    entries
+      |> Enum.map(fn {i, _, _} -> i end)
+      |> Enum.map(&to_string/1)
+      |> Enum.map(&String.length/1)
+      |> Enum.max
+      |> max(String.length(id_header))
+  end
 
   def width_of_notes(entries) do
     entries
-      |> Enum.map(fn {_, n} -> n end)
+      |> Enum.map(fn {_, _, n} -> n end)
       |> Enum.map(&String.length/1)
       |> Enum.max
       |> max(String.length(note_header))
@@ -15,7 +26,7 @@ defmodule Notes.Formatter do
 
   def width_of_priorities(entries) do
     entries
-      |> Enum.map(fn {p, _} -> p end)
+      |> Enum.map(fn {_, p, _} -> p end)
       |> Enum.map(&to_string/1)
       |> Enum.map(&String.length/1)
       |> Enum.max
