@@ -3,7 +3,7 @@ defmodule Notes.CLI do
   import Notes.Printer, only: [ print_notes: 1, print_help: 0]
   alias Notes.Config, as: Config
 
-	def main(args) do
+  def main(args) do
     	args
     		|> parse_args
     		|> process
@@ -28,7 +28,7 @@ defmodule Notes.CLI do
 
   def process(:help) do
     print_help
-	end
+  end
 
   def process({:ls, count}) do
     print_notes(count)
