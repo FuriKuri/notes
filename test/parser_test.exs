@@ -3,6 +3,9 @@ defmodule ParserNotesTest do
 
   alias Notes.Parser, as: NP
 
+  test "return max id of all notes" do
+    assert NP.max_id(["3;2;1", "5;1;1", "2;1;1"]) == 5
+  end
 
   test "map priority string to integer type" do
     assert NP.notes(["1;1;Note"], 1) == [{1, 1, "Note"}]
