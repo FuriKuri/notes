@@ -1,5 +1,5 @@
 defmodule Notes.CLI do
-  import Notes.File, only: [ add: 2 ]
+  import Notes.File, only: [ add: 2, remove: 2 ]
   import Notes.Printer, only: [ print_notes: 1, print_help: 0]
   alias Notes.Config, as: Config
 
@@ -22,6 +22,8 @@ defmodule Notes.CLI do
       {_, ["ls", count], _} -> {:ls, binary_to_integer(count)}
       {_, ["ls"], _} -> {:ls, Config.default_count}
 
+      {_, ["rm", id], _} -> {:rm, id}
+
       {_, _, _} -> :help
     end
   end
@@ -32,6 +34,10 @@ defmodule Notes.CLI do
 
   def process({:ls, count}) do
     print_notes(count)
+  end
+
+  def process({:rm, id}) do
+    remove(Config.note_file, id)
   end
 
   def process({:add, note, priority}) do

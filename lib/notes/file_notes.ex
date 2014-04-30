@@ -9,6 +9,25 @@ defmodule Notes.File do
     end
   end
 
+  def remove(filename, id) do
+    notes = read(filename)
+      |> Enum.map(&(String.split(&1, ";")))
+      |> Enum.map(fn [i, p, n] -> {binary_to_integer(i), binary_to_integer(p), n} end)
+      |> Enum.filter(fn {current_id, _, _} -> id != to_string(current_id) end)
+      |> write(filename)
+  end
+
+  def write(notes, filename) do
+    content = notes
+      |> Enum.map(&line/1)
+      |> Enum.reduce(&("#{&2}\n#{&1}"))
+    File.write!(filename, content)
+  end
+
+  def line(note) do
+    note |> tuple_to_list |> Enum.join(";")
+  end
+
   def add(filename, note) do
     next_id = max_id(read(filename)) + 1
     old_content = read(filename) |> Enum.to_list
