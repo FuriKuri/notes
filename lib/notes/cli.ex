@@ -19,8 +19,8 @@ defmodule Notes.CLI do
       {[priority: priority], ["add", note], _} -> {:add, note, priority}
       {_, ["add", note], _} -> {:add, note, 0}
 
-      {_, ["list", count], _} -> {:list, count}
-      {_, ["list"], _} -> {:list, Config.default_count}
+      {_, ["ls", count], _} -> {:ls, binary_to_integer(count)}
+      {_, ["ls"], _} -> {:ls, Config.default_count}
   	end
   end
 
@@ -28,7 +28,7 @@ defmodule Notes.CLI do
     print_help
 	end
 
-  def process({:list, count}) do
+  def process({:ls, count}) do
     print_notes(count)
   end
 
