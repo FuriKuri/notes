@@ -1,4 +1,6 @@
 defmodule Notes.File do
+  import Notes.Parser, only: [max_id: 1]
+
   def read(filename) do
     case File.open(filename) do
       { :ok, file } -> IO.stream(file, :line) |> Stream.map(&String.strip(&1))
@@ -8,8 +10,9 @@ defmodule Notes.File do
   end
 
   def add(filename, note) do
+    next_id = max_id(read(filename)) + 1
     old_content = read(filename) |> Enum.to_list
-    content = [note] ++ old_content
+    content = ["#{next_id};" <> note] ++ old_content
     File.write!(filename, Enum.reduce(content, &("#{&2}\n#{&1}")))
   end
 

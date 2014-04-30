@@ -5,7 +5,7 @@ defmodule FileNotesTest do
 
   test "read notes file" do
     content = NF.read("test/fixture/notes.txt") |> Enum.to_list
-    assert content == ["Hello", "World", "It's me"]
+    assert content == ["1;1;Hello", "2;2;World", "3;3;It's me"]
   end
 
   test "read from empty file" do
@@ -14,8 +14,8 @@ defmodule FileNotesTest do
 
   test "add note to file" do
     file_content = File.read!("test/fixture/notes.txt")
-    NF.add("test/fixture/notes.txt", "New note")
-    assert NF.read("test/fixture/notes.txt") |> Enum.at(0) == "New note"
+    NF.add("test/fixture/notes.txt", "1;New note")
+    assert NF.read("test/fixture/notes.txt") |> Enum.at(0) == "4;1;New note"
     File.write!("test/fixture/notes.txt", file_content)
   end
 

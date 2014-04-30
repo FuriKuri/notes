@@ -1,5 +1,5 @@
 defmodule Notes.CLI do
-  import Notes.File, only: [ add: 2]
+  import Notes.File, only: [ add: 2 ]
   import Notes.Printer, only: [ print_notes: 1, print_help: 0]
   alias Notes.Config, as: Config
 
