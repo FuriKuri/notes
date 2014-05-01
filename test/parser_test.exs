@@ -3,6 +3,8 @@ defmodule ParserNotesTest do
 
   alias Notes.Parser, as: NP
 
+  doctest NP
+
   test "return max id of all notes" do
     assert NP.max_id(["3;2;1", "5;1;1", "2;1;1"]) == 5
   end

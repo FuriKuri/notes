@@ -1,4 +1,12 @@
 defmodule Notes.Parser do
+  @doc """
+  Returns a limited sorted numbers notes in seperate tuples
+
+  ## Exmaple
+    iex> notes = ["4;1;Note one", "2;0;Note two", "1;2;Note three"]
+    iex> Notes.Parser.notes(notes, 2)
+    [{1, 2, "Note three"}, {4, 1, "Note one"}]
+  """
   def notes(notes, count) do
     notes
       |> Enum.map(&(String.split(&1, ";")))
@@ -7,6 +15,14 @@ defmodule Notes.Parser do
       |> Enum.take(count)
   end
 
+  @doc """
+  Returns the highest id of all notes entries
+
+  ## Example
+    iex> notes = ["4;3;Note one", "2;3;Note two", "1;3;Note three"]
+    iex> Notes.Parser.max_id(notes)
+    4
+  """
   def max_id(notes) do
     notes
       |> Enum.map(&(String.split(&1, ";")))
