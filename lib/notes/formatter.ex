@@ -7,30 +7,31 @@ defmodule Notes.Formatter do
   @attr "ID"
   def id_header, do: @attr
 
-  def width_of_ids(entries) do
+  def header, do: [id_header, prio_header, note_header]
+
+  def widths_of(entries) do
+    [width_of_ids(entries), width_of_priorities(entries), width_of_notes(entries)]
+  end
+
+  def max_width_of(element_fn, header_title, entries) do
     entries
-      |> Enum.map(fn {i, _, _} -> i end)
+      |> Enum.map(element_fn)
       |> Enum.map(&to_string/1)
       |> Enum.map(&String.length/1)
       |> Enum.max
-      |> max(String.length(id_header))
+      |> max(String.length(header_title))
+  end
+
+  def width_of_ids(entries) do
+    max_width_of(fn {i, _, _} -> i end, id_header, entries)
   end
 
   def width_of_notes(entries) do
-    entries
-      |> Enum.map(fn {_, _, n} -> n end)
-      |> Enum.map(&String.length/1)
-      |> Enum.max
-      |> max(String.length(note_header))
+    max_width_of(fn {_, _, n} -> n end, note_header, entries)
   end
 
   def width_of_priorities(entries) do
-    entries
-      |> Enum.map(fn {_, p, _} -> p end)
-      |> Enum.map(&to_string/1)
-      |> Enum.map(&String.length/1)
-      |> Enum.max
-      |> max(String.length(prio_header))
+    max_width_of(fn {_, p, _} -> p end, prio_header, entries)
   end
 
   def separator(column_widths) do
