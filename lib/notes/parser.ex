@@ -24,9 +24,20 @@ defmodule Notes.Parser do
     4
   """
   def max_id(notes) do
+    if empty_notes?(notes) do
+      0
+    else
+      notes
+        |> Enum.map(&(String.split(&1, ";")))
+        |> Enum.map(fn [i, _, _] -> binary_to_integer(i) end)
+        |> Enum.max
+    end
+  end
+
+  def empty_notes?(notes) do
     notes
-      |> Enum.map(&(String.split(&1, ";")))
-      |> Enum.map(fn [i, _, _] -> binary_to_integer(i) end)
-      |> Enum.max
+      |> Enum.map(&String.strip/1)
+      |> Enum.filter(&(String.length(&1) != 0))
+      |> Enum.empty?
   end
 end

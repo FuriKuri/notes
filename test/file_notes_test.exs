@@ -24,4 +24,11 @@ defmodule FileNotesTest do
     assert NF.read("test/fixture/empty.txt") == []
     assert File.exists?("test/fixture/empty.txt")
   end
+
+  test "add note to empty file" do
+    file_content = File.read!("test/fixture/empty.txt")
+    NF.add("test/fixture/empty.txt", "1;New note")
+    assert NF.read("test/fixture/empty.txt") |> Enum.at(0) == "1;1;New note"
+    File.write!("test/fixture/empty.txt", file_content)
+  end
 end
