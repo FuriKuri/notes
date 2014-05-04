@@ -9,5 +9,12 @@ My first Elixir project. With this little tool, you can save notes.
  4. Execute `./notes help`
 ## Usage
 ### Adding note
+```
+./notes add "my note"
+./notes add "my note with priority" -p 1
+```
 ### List notes
+./notes ls
+./notes ls 10 # list only first 10 notes
 ### Delete note
+./notes rm 4 # delete note with id 4
