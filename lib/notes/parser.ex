@@ -16,7 +16,7 @@ defmodule Notes.Parser do
   end
 
   @doc """
-  Returns the highest id of all notes entries
+  Returns the highest id of all note entries
 
   ## Example
     iex> notes = ["4;3;Note one", "2;3;Note two", "1;3;Note three"]
