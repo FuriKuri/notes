@@ -25,4 +25,3 @@ My first Elixir project. With this little tool, you can save notes.
 ```
 ./notes rm 4 # delete note with id 4
 ```
-dummy
